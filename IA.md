@@ -38,6 +38,7 @@
 10. **Documente decisões** - Escolhas arquiteturais não óbvias em `docs/`
 11. **Pergunte se dúbio** - Não assuma abordagem
 12. **Antes de modificar ou criar um arquivo** - verifique se não um arquivo sobre ele em docs/ que contenha informações importantes
+13. **Gerencie o .gitignore** - Sempre que criar ou modificar arquivos de configuração, dependências ou builds, verifique e atualize o `.gitignore` para excluir artefatos gerados (ex: `node_modules/`, `__pycache__/`, `*.log`, `.env`). Crie o `.gitignore` caso não exista.
 
 ## Otimizações para IA
 
