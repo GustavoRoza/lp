@@ -10,6 +10,7 @@
 - **Exclusões**: Apenas com comando explícito
 - **Ações críticas**: Peça confirmação antes
 - **Este arquivo**: NUNCA modifique sem ordem explícita
+- **Gitignore**: Sempre que necessário, crie ou atualize o `.gitignore`
 
 ## Regras para Vibe Coding
 
