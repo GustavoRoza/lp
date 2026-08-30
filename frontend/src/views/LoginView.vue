@@ -1,271 +1,184 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
-const email = ref('')
-const password = ref('')
-const remember = ref(false)
-const loading = ref(false)
-const error = ref('')
-const success = ref('')
+const visible = ref(false)
+const hearts = ref([])
 
-const handleLogin = async () => {
-  error.value = ''
-  success.value = ''
-  loading.value = true
-
-  try {
-    const res = await fetch('/api/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email.value, password: password.value })
+onMounted(() => {
+  setTimeout(() => { visible.value = true }, 100)
+  for (let i = 0; i < 15; i++) {
+    hearts.value.push({
+      id: i,
+      left: Math.random() * 100,
+      delay: Math.random() * 5,
+      duration: 3 + Math.random() * 4,
+      size: 14 + Math.random() * 20
     })
-
-    const data = await res.json()
-
-    if (!res.ok) {
-      error.value = data.error || 'Erro ao fazer login'
-      return
-    }
-
-    success.value = `Bem-vindo, ${data.user.name}!`
-    localStorage.setItem('token', data.token)
-    localStorage.setItem('user', JSON.stringify(data.user))
-
-    setTimeout(() => {
-      window.location.href = '/dashboard'
-    }, 1500)
-  } catch (err) {
-    error.value = 'Erro de conexão com o servidor'
-  } finally {
-    loading.value = false
   }
-}
-
-const handleRegister = () => {
-  alert('Redirecionando para página de cadastro...')
-}
+})
 </script>
 
 <template>
-  <div class="login-container">
-    <div class="login-box">
-      <h1 class="login-title">Entrar</h1>
-      <p class="login-subtitle">Digite suas credenciais</p>
+  <div class="love-container">
+    <div v-for="h in hearts" :key="h.id" class="floating-heart"
+         :style="{ left: h.left + '%', animationDelay: h.delay + 's', animationDuration: h.duration + 's', fontSize: h.size + 'px' }">
+      &#10084;
+    </div>
 
-      <form @submit.prevent="handleLogin" class="login-form">
-        <div class="form-group">
-          <label for="email">E-mail</label>
-          <input
-            id="email"
-            type="email"
-            v-model="email"
-            placeholder="seu@email.com"
-            autocomplete="email"
-            required
-            :disabled="loading"
-          >
-        </div>
+    <div class="love-card" :class="{ show: visible }">
+      <div class="photo-wrapper">
+        <img src="/fotonossa.png" alt="Nós dois" class="couple-photo" />
+      </div>
+      <h1 class="love-title">Katriny</h1>
+      <p class="love-subtitle">Eu te amo</p>
 
-        <div class="form-group">
-          <label for="password">Senha</label>
-          <input
-            id="password"
-            type="password"
-            v-model="password"
-            placeholder="********"
-            autocomplete="current-password"
-            required
-            :disabled="loading"
-          >
-        </div>
+      <div class="love-message">
+        <p>Eu não sei explicar o que sinto, mas sei que cada segundo ao seu lado é especial.</p>
+        <p>Voce faz meu dia ter mais cor, meu sorriso ser mais verdadeiro.</p>
+        <p>Eu quero estar ao seu lado em todos os momentos, nos bons e nos difíceis.</p>
+      </div>
 
-        <div class="remember-row">
-          <input type="checkbox" id="remember" v-model="remember" :disabled="loading">
-          <label for="remember">Lembrar-me</label>
-        </div>
-
-        <button type="submit" class="btn-login" :disabled="loading">
-          {{ loading ? 'Entrando...' : 'Entrar' }}
-        </button>
-
-        <div v-if="error" class="toast error">{{ error }}</div>
-        <div v-if="success" class="toast success">{{ success }}</div>
-      </form>
-
-      <div class="register-row">
-        Não tem conta? <button type="button" class="btn-register" @click="handleRegister">Cadastrar-se</button>
+      <div class="love-footer">
+        <span class="signature">Com todo o meu amor,</span>
+        <span class="declarer">G. Fonseca</span>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.login-container {
+.love-container {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background-color: #f0f0f0;
-  font-family: "Segoe UI", system-ui, sans-serif;
+  background: linear-gradient(135deg, #1a0a0a 0%, #2d1015 50%, #1a0a0a 100%);
+  font-family: "Georgia", "Times New Roman", serif;
+  overflow: hidden;
+  position: relative;
 }
 
-.login-box {
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 40px;
+.floating-heart {
+  position: fixed;
+  bottom: -50px;
+  color: rgba(255, 100, 120, 0.25);
+  animation: floatUp linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.love-card {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 100, 120, 0.2);
+  border-radius: 16px;
+  padding: 50px 40px;
   width: 100%;
-  max-width: 350px;
+  max-width: 420px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px) scale(0.95);
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  z-index: 1;
 }
 
-.login-title {
-  font-size: 24px;
+.love-card.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.photo-wrapper {
+  width: 130px;
+  height: 130px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid rgba(255, 100, 120, 0.4);
+  box-shadow: 0 0 25px rgba(255, 100, 120, 0.3);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.couple-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(255, 100, 120, 0.3); }
+  50% { box-shadow: 0 0 35px rgba(255, 100, 120, 0.5); }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.2); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.15); }
+}
+
+.love-title {
+  font-size: 40px;
   font-weight: 700;
-  color: #333;
+  color: #ff6b8a;
   margin-bottom: 8px;
-  text-align: center;
+  letter-spacing: 2px;
 }
 
-.login-subtitle {
-  font-size: 14px;
-  color: #666;
-  text-align: center;
+.love-subtitle {
+  font-size: 18px;
+  color: #ff9eb5;
+  font-style: italic;
   margin-bottom: 30px;
 }
 
-.form-group {
-  margin-bottom: 20px;
+.love-message {
+  margin-bottom: 30px;
 }
 
-.form-group label {
+.love-message p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: rgba(255, 200, 210, 0.85);
+  margin-bottom: 12px;
+}
+
+.love-footer {
+  border-top: 1px solid rgba(255, 100, 120, 0.15);
+  padding-top: 20px;
+}
+
+.signature {
+  font-size: 14px;
+  color: #ff6b8a;
+  font-style: italic;
+  letter-spacing: 1px;
   display: block;
-  font-size: 14px;
-  font-weight: 500;
-  color: #333;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
-.form-group input {
-  width: 100%;
-  padding: 12px 14px;
-  font-size: 14px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  outline: none;
-  box-sizing: border-box;
-}
-
-.form-group input:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
-}
-
-.form-group input:disabled {
-  background-color: #f5f5f5;
-  cursor: not-allowed;
-}
-
-.form-group input::placeholder {
-  color: #999;
-}
-
-.remember-row {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.remember-row input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
-  margin-right: 8px;
-  accent-color: #007bff;
-}
-
-.remember-row label {
-  font-size: 14px;
-  color: #333;
-  cursor: pointer;
-}
-
-.btn-login {
-  width: 100%;
-  padding: 12px;
-  font-size: 14px;
+.declarer {
+  font-size: 18px;
+  color: #ff9eb5;
   font-weight: 600;
-  color: white;
-  background-color: #007bff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.btn-login:hover:not(:disabled) {
-  background-color: #0056b3;
-}
-
-.btn-login:active:not(:disabled) {
-  background-color: #004085;
-}
-
-.btn-login:disabled {
-  background-color: #99c2f2;
-  cursor: not-allowed;
-}
-
-.toast {
-  padding: 12px 16px;
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 500;
-  margin-top: 16px;
-  text-align: center;
-  animation: slideIn 0.3s ease;
-}
-
-.toast.error {
-  background-color: #dc3545;
-  color: white;
-}
-
-.toast.success {
-  background-color: #28a745;
-  color: white;
-}
-
-.register-row {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 14px;
-  color: #666;
-}
-
-.btn-register {
-  background: none;
-  border: none;
-  color: #007bff;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  text-decoration: underline;
-  padding: 0;
-}
-
-.btn-register:hover {
-  color: #0056b3;
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  letter-spacing: 1px;
 }
 </style>

@@ -1,37 +1,34 @@
 # LoginView.vue - Documentação
 
 ## Descrição da Mudança
-Componente Vue 3 para tela de login, substituindo o HTML puro anterior.
+Componente Vue 3 transformado de tela de login para **declaração de amor para a Katriny**.
 
 ## Arquivo
 - `frontend/src/views/LoginView.vue`
 
+## Funcionalidade Atual
+- Exibe card com foto do casal (`/fotonossa.png`)
+- Animação de entrada suave
+- Corações flutuantes no fundo
+- Coração pulsante no card
+- Mensagem de amor personalizada
+- Rodapé com assinatura do declarador (G. Fonseca)
+
 ## Decisões
 - Composition API com `<script setup>`
-- Estado reativo com `ref`
 - CSS scoped para isolamento de estilos
-- Integração direta com backend via `fetch` + proxy Vite
-
-## Props/Emits
-- Nenhuma (componente de página autossuficiente)
+- Paleta de cores romântica (tons de rosa/vermelho)
+- Fundo escuro com gradiente
+- Tipografia serif (Georgia) para elegance
+- Foto circular com efeito glow
+- Animações CSS (heartbeat, floatUp, pulse-glow)
 
 ## Estado Interno
-- `email`, `password` - inputs do formulário
-- `remember` - checkbox lembrar-me
-- `loading` - estado de carregamento
-- `error`, `success` - mensagens de toast
-
-## Métodos
-- `handleLogin()` - Chama API, trata resposta, salva no localStorage, redireciona
-- `handleRegister()` - Placeholder para futuro cadastro
+- `visible` - controla animação de entrada
+- `hearts` - array de corações flutuantes com propriedades aleatórias
 
 ## Melhorias Futuras
-- [ ] Extrair lógica de auth para composable `useAuth()`
-- [ ] Adicionar validação de email (regex)
-- [ ] Mostrar/ocultar senha
-- [ ] Animação de shake em erro
-- [ ] Acessibilidade: aria-live para toasts
-
-## Bugs Conhecidos
-- Redirecionamento hardcoded para `/dashboard` (rota inexistente)
-- Sem limpeza de erro/success ao digitar novamente
+- [ ] Adicionar música de fundo
+- [ ] Efeito de digitação na mensagem
+- [ ] Botão "Eu também te amo" com resposta
+- [ ] Animação de confetes
