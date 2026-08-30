@@ -4,6 +4,8 @@
 - **Ao ler**: Guarde contexto na sessão de chat
 - **Ao ouvir "atualize contexto"**: Releia este arquivo
 - **Commits/pushes**: Apenas com comando explícito
+- **Antes de commitar**: Verifique status do repo (git status, git diff) para confirmar o que será commitado
+- **Na dúvida sobre commit**: Pergunte se deve commitar determinados arquivos
 - **Exclusões**: Apenas com comando explícito
 - **Ações críticas**: Peça confirmação antes
 - **Este arquivo**: NUNCA modifique
