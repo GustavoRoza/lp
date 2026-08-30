@@ -1,7 +1,7 @@
 # Instruções Universais para IA - Repositório 
 
 ## Meta-Instruções e Segurança
-- **Ao ler**: Guarde contexto na sessão de chat
+- **Ao ler**: Guarde contexto na sessão de chat, confirme que guardor contexto.
 - **Ao ouvir "atualize contexto"**: Releia este arquivo (IA.md) do disco, compare com seu estado anterior na sessão, e informe o que mudou no arquivo desde a última leitura. Não confie apenas na memória da sessão.
 - **Proteção de Dados**: NUNCA exiba no output, modifique ou proponha commits de arquivos contendo chaves de API, secrets ou dados sensíveis (ex: `.env`)
 - **Ao modificar/criar arquivo**: Verifique se existe doc correspondente em `docs/` com instruções ou anotações relevantes antes de prosseguir
