@@ -3,6 +3,7 @@
 ## Meta-Instruções
 - **Ao ler**: Guarde contexto na sessão de chat
 - **Ao ouvir "atualize contexto"**: Releia este arquivo, e informe o que de novo foi adicionado ao contexto.
+- **Ao modificar/criar arquivo**: Verifique se existe doc correspondente em `docs/` com instruções ou anotações relevantes antes de prosseguir
 - **Commits/pushes**: Apenas com comando explícito
 - **Antes de commitar**: Verifique status do repo (git status, git diff) para confirmar o que será commitado
 - **Na dúvida sobre commit**: Pergunte se deve commitar determinados arquivos
@@ -16,6 +17,7 @@
 - Crie `.md` em `docs/` para cada arquivo criado/modificado
 - Formato: `docs/<nome_arquivo_criadoOUmodificado>.md`
 - Conteúdo: descrição da mudança, arquivos afetados, decisões, contexto
+- **Documente melhorias e bugs**: Ao criar/editar, registre no doc possíveis melhorias futuras ou bugs conhecidos do arquivo
 
 ### Fluxo de Desenvolvimento
 1. **Explore primeiro** - Busque no codebase (grep/glob) para entender padrões, convenções, arquitetura
@@ -47,3 +49,6 @@
 - **Respostas concisas**: < 4 linhas salvo pedido de detalhe
 - **Rode testes/lint** após mudanças
 - **Subagentes**: Use ferramenta `task` para tarefas complexas/multietapa
+
+---
+**G. Fonseca**
