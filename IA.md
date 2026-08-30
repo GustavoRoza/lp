@@ -8,6 +8,6 @@ se você for um modelo de IA, antes de fazer qualquer ação no repositório lem
 
 -só apague arquivos se receber comando explícito.
 
--Ao fazer ações críticas, sempre pessa confirmação.
+-Ao fazer ações críticas, sempre peça confirmação.
 
 -Nunca modifique este arquivo.
