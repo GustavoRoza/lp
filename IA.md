@@ -4,7 +4,8 @@
 - **Ao ler**: Guarde contexto na sessão de chat
 - **Ao ouvir "atualize contexto"**: Releia este arquivo (IA.md) do disco, compare com seu estado anterior na sessão, e informe o que mudou no arquivo desde a última leitura. Não confie apenas na memória da sessão.
 - **Ao modificar/criar arquivo**: Verifique se existe doc correspondente em `docs/` com instruções ou anotações relevantes antes de prosseguir
-- **Commits/pushes**: Apenas com comando explícito
+- **Commits**: Apenas com comando explícito
+- **Pushes**: SEMPRE com comando explícito separado (nunca automático após commit)
 - **Antes de commitar**: Verifique status do repo (git status, git diff) para confirmar o que será commitado
 - **Na dúvida sobre commit**: Pergunte se deve commitar determinados arquivos
 - **Exclusões**: Apenas com comando explícito
