@@ -1,41 +1,47 @@
-se você for um modelo de IA, antes de fazer qualquer ação no repositório lembre-se:
+# Instruções IA - Repositório lp
 
--Ao ler este arquivo, guarde contexto sobre ele na nossa sessão de chat.
+## Meta-Instruções
+- **Ao ler**: Guarde contexto na sessão de chat
+- **Ao ouvir "atualize contexto"**: Releia este arquivo
+- **Commits/pushes**: Apenas com comando explícito
+- **Exclusões**: Apenas com comando explícito
+- **Ações críticas**: Peça confirmação antes
+- **Este arquivo**: NUNCA modifique
 
--Sempre que eu falar "atualize contexto", leia este aquivo.
+## Regras para Vibe Coding
 
--Só faça commits e pushes se receber comando explícito.
+### Documentação
+- Crie `.md` em `docs/` para cada arquivo criado/modificado
+- Formato: `docs/<nome_arquivo_criadoOUmodificado>.md`
+- Conteúdo: descrição da mudança, arquivos afetados, decisões, contexto
 
--só apague arquivos se receber comando explícito.
+### Fluxo de Desenvolvimento
+1. **Explore primeiro** - Busque no codebase (grep/glob) para entender padrões, convenções, arquitetura
+2. **Siga convenções** - Nomenclatura, estrutura de pastas, style guides, linting
+3. **Edite > Crie** - Prefira editar arquivos existentes a criar novos
+4. **Código limpo** - Legível, testável, mínimo
+5. **Adicione testes** - Para novas funcionalidades
+6. **Valide** - Rode lint/typecheck antes de considerar completo
+7. **Commits atômicos** - Mensagens claras
+8. **Documente decisões** - Escolhas arquiteturais não óbvias em docs/
+9. **Pergunte se dúbio** - Não assuma abordagem
 
--Ao fazer ações críticas, sempre peça confirmação.
+## Otimizações para IA
 
--Nunca modifique este arquivo.
+### Uso de Ferramentas
+- **Busque primeiro**: grep/glob antes de ler arquivos grandes
+- **Leia seletivamente**: Use offset/limit, não arquivos inteiros
+- **Paralelize**: Agrupe reads, greps, bash independentes
+- **Edite > Reescreva**: Use ferramenta `edit`, não `write` para arquivos existentes
+- **replaceAll**: Para mudanças repetitivas no arquivo
 
--Instruções para vibe coding:
-  - Sempre crie um arquivo .md na pasta docs/ na raiz do projeto documentando o que foi criado ou modificado
-  - Formato: docs/<nome_do_arquivo_criadoOUmodificado>.md
-  - O arquivo deve conter: descrição da mudança, arquivos afetados, decisões tomadas e contexto relevante
-  - Antes de codar, explore o código existente para entender padrões, convenções e arquitetura
-  - Siga as convenções do projeto: nomenclatura, estrutura de pastas, style guides, linting
-  - Prefira editar arquivos existentes a criar novos, a menos que necessário
-  - Escreva código limpo, legível e testável
-  - Adicione testes para novas funcionalidades
-  - Execute lint/typecheck antes de considerar a tarefa completa
-  - Mantenha commits atômicos e mensagens claras
-  - Documente decisões arquiteturais não óbvias nos arquivos .md em docs/
-  - Se houver dúvida sobre abordagem, pergunte antes de implementar
+### Dependências e Padrões
+- **Verifique existentes**: Confirme libs/frameworks no projeto antes de sugerir novos
+- **Siga padrões do codebase**: Imports, tipagem, estrutura de pastas
+- **Sem comentários** salvo se solicitado
+- **Sem docs/README** salvo se solicitado
 
--Otimizações para uso da IA:
-  - Use ferramentas de busca (grep, glob) antes de ler arquivos grandes
-  - Leia apenas trechos relevantes (use offset/limit) em vez de arquivos inteiros
-  - Agrupe operações independentes em paralelo (múltiplas reads, greps, bash)
-  - Prefira editar arquivos existentes (edit) a reescrever (write)
-  - Use replaceAll para mudanças repetitivas
-  - Verifique se bibliotecas/frameworks já existem no projeto antes de sugerir novos
-  - Rode testes/lint após mudanças para validar
-  - Mantenha respostas concisas (< 4 linhas) salvo pedido de detalhe
-  - Não adicione comentários no código salvo se solicitado
-  - Não crie docs/README salvo se solicitado
-  - Use padrões do codebase: imports, tipagem, estrutura de pastas
-  - Para tarefas complexas/multietapa, use subagentes (task tool)
+### Saída e Processo
+- **Respostas concisas**: < 4 linhas salvo pedido de detalhe
+- **Rode testes/lint** após mudanças
+- **Subagentes**: Use ferramenta `task` para tarefas complexas/multietapa
