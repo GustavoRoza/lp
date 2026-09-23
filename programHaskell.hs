@@ -168,3 +168,30 @@ sistema = [ ([("Arroz", 2, 10.5)], Aberto)
 
 listaPedidosPagos sistema
 Resultado: [([("Feijão",1,8.0)],Pago),([("Leite",3,5.0)],Pago)] -}
+
+--6c
+totalVendas :: Sistema -> Double
+totalVendas sis = sum (map valorPedido (filter (\(_, status) -> status == Pago) sis))
+
+sistemaTeste :: Sistema
+sistemaTeste =
+  [ ([("Arroz", 2, 10.5), ("Feijao", 1, 8.0)], Aberto)
+  , ([("Leite", 3, 5.0)], Pago)
+  , ([("Cafe", 1, 12.0)], Pago)
+  , ([("Acucar", 4, 2.5)], Cancelado)
+  ]
+
+{- totalVendas sistemaTeste
+ Resultado: 27.0 (Leite 15.0 + Cafe 12.0; Aberto e Cancelado ignorados) -}
+
+
+--6e
+aplicaDesconto :: Double -> Pedido -> Pedido
+aplicaDesconto d (itens, Aberto) = (map (\(p,q,pr) -> (p,q,pr*(1-d))) itens, Aberto)
+aplicaDesconto _ pedido = pedido
+
+{- aplicaDesconto 0.1 ([("Arroz", 2, 10.0)], Aberto)
+ Resultado: ([("Arroz",2,9.0)],Aberto)
+
+ aplicaDesconto 0.1 ([("Leite", 1, 5.0)], Pago)
+ Resultado: ([("Leite",1,5.0)],Pago) -- inalterado -}
